@@ -13,17 +13,23 @@ public class MenuUI : MonoBehaviour
     public TextMeshProUGUI highScore;
     public Button start;
     public Button exit;
-    public string playerName;
+    public TMP_InputField nameInput;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         start = GetComponent<Button>();
         exit = GetComponent<Button>();
+
+        var gm = GameDataManager.Instance;
+        highScore.text = $"High Score: {gm.HighScore} by {gm.HighScorePlayer}";
+        
     }
 
     public void StartGame()
     {
+        GameDataManager.Instance.PlayerName = nameInput.text;
         SceneManager.LoadScene(1);  
     }
 
@@ -36,8 +42,10 @@ Application.Quit();
 #endif
     }
 
-    public void ReadPlayerName(string i)
+    /*public void ReadPlayerName(string i)
     {
-        playerName = i;
-    }
+        PlayerName = i;
+        GameDataManager.Instance.name = PlayerName;
+        GameDataManager.Instance.SaveName();
+    }*/
 }
